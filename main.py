@@ -1,13 +1,15 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
-# from PyQt5.QtWidgets import  QMainWindow
+from recognize import Recognition
 from webcam import WebCam
 from face import Face
 import cv2
 from shutil import copyfile
 class Window2(object):
     def setupUi(self, MainWindow):
+        
         MainWindow.setObjectName("MainWindow2")
         MainWindow.resize(800, 600)
+        self.filePath=""
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.nameInput = QtWidgets.QLineEdit(self.centralwidget)
@@ -43,12 +45,8 @@ class Window2(object):
         self.browse_btn.setObjectName("browse_btn")
         self.browse_btn.setText("Browse Image")
         self.browse_btn.setVisible(False)
-        self.fileName_label = QtWidgets.QLabel(self.centralwidget)
-        self.fileName_label.setGeometry(QtCore.QRect(430, 320, 141, 21))
-        self.fileName_label.setObjectName("fileName_label")
-        self.fileName_label.setText("file name")
-        self.fileName_label.setVisible(False)
-        self.fileName_label.resize(200, 25)
+        self.browse_btn.clicked.connect(self.getFile)
+        
 
         self.start_btn = QtWidgets.QPushButton(self.centralwidget)
         self.start_btn.setGeometry(QtCore.QRect(680, 260, 89, 25))
@@ -62,7 +60,7 @@ class Window2(object):
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
         MainWindow.setStatusBar(self.statusbar)
-
+        self.w=MainWindow
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
@@ -83,20 +81,25 @@ class Window2(object):
         if text =="Select Image":
             print("true")
             #TODO
-            self.fileName_label.setText("file name")
 
-
-
-
+            
             self.browse_btn.setVisible(True)
 
-            self.fileName_label.setVisible(True)
+
         else:
             
             self.resultLabel.setVisible(False)
+           
 
-            self.fileName_label.setVisible(False)            
-            
+
+    def getFile(self):
+        fileName = QtWidgets.QFileDialog.getOpenFileName(self.centralwidget,'Select image','.','Image Files (*.jpg *.jpeg)')
+        # print(fileName[0])
+        if len(fileName) >0:
+            print(fileName[0])
+            self.filePath=fileName[0]
+
+        
     def start_clicked(self):
         text = str(self.comboBox.currentText())
         name=self.nameInput.text()
@@ -111,6 +114,25 @@ class Window2(object):
                 # self.resultLabel.setVisible(True)
                 QtWidgets.QMessageBox.critical(self.centralwidget, "Error",'Please Select Input Source')
 
+            if text == "Select Image":
+                if self.filePath == "":
+                    QtWidgets.QMessageBox.critical(self.centralwidget, "Error",'Please Select Image')
+                else:
+                    img = cv2.imread(self.filePath)
+                    face = Face(img,1)
+                    if face.hasFace():
+                        if face.numberOfFace()  == 1:
+                            src=self.filePath
+                            dst="./data/"+name+".jpg"
+                            copyfile(src, dst)
+                            QtWidgets.QMessageBox.information(self.centralwidget, "Success",'Face successfully added')
+                            # QtWidgets.qApp.quit()
+                            # self.w.close()
+                        else:
+                            QtWidgets.QMessageBox.critical(self.centralwidget, "Error",'Image contains '+str(face.numberOfFace())+" faces. It sholud only have one face" )
+
+                    else:
+                        QtWidgets.QMessageBox.critical(self.centralwidget, "Error","Image has no face" )
 
             else:
                 inputScr=0
@@ -166,7 +188,7 @@ class Ui_MainWindow(object):
         self.live_btn= QtWidgets.QPushButton(self.centralwidget)
         self.live_btn.setGeometry(QtCore.QRect(260, 350, 121, 61))
         self.live_btn.setObjectName("live_btn")
-
+        self.live_btn.clicked.connect(self.live_clicked)
 
         self.image_btn= QtWidgets.QPushButton(self.centralwidget)
         self.image_btn.setGeometry(QtCore.QRect(420, 350, 121, 61))
@@ -202,7 +224,15 @@ class Ui_MainWindow(object):
         
         self.window.show()
 
-
+    def live_clicked(self):
+        buttonReply = QtWidgets.QMessageBox.question(self.centralwidget, 'Live Feed!', "Do you like use external web cam?", QtWidgets.QMessageBox.Yes , QtWidgets.QMessageBox.No)
+        if buttonReply == QtWidgets.QMessageBox.Yes:
+            rec = Recognition()
+            rec.recognizeLive(2)
+        else:
+            rec = Recognition()
+            rec.recognizeLive(0)
+        # pass
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)

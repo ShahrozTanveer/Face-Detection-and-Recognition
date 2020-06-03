@@ -120,7 +120,7 @@ class Recognition:
 
 
 
-rec= Recognition()
-# print(rec.recognizeImage("./testData/charles.jpg"))
-# print(rec.recognizeImage("./testData/tstMAx.jpg"))
-rec.recognizeLive(2)
+# rec= Recognition()
+# # print(rec.recognizeImage("./testData/charles.jpg"))
+# # print(rec.recognizeImage("./testData/tstMAx.jpg"))
+# rec.recognizeLive(2)

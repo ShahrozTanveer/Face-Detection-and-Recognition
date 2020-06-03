@@ -72,11 +72,6 @@ class Face:
 
 
 
-# img= cv2.imread("./data/staff.jpg")
-# face=Face(img,1)
-# print(face.hasFace())
-# print(face.numberOfFace())
-
 
 
 

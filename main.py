@@ -162,6 +162,18 @@ class Ui_MainWindow(object):
         self.add_btn.setGeometry(QtCore.QRect(420, 260, 121, 61))
         self.add_btn.setObjectName("add_btn")
         self.add_btn.clicked.connect(self.add_clicked)
+
+        self.live_btn= QtWidgets.QPushButton(self.centralwidget)
+        self.live_btn.setGeometry(QtCore.QRect(260, 350, 121, 61))
+        self.live_btn.setObjectName("live_btn")
+
+
+        self.image_btn= QtWidgets.QPushButton(self.centralwidget)
+        self.image_btn.setGeometry(QtCore.QRect(420, 350, 121, 61))
+        self.image_btn.setObjectName("image_btn")
+
+
+
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 22))
@@ -180,6 +192,8 @@ class Ui_MainWindow(object):
         self.label.setText(_translate("MainWindow", "Face Detection and Recognition"))
         self.login_btn.setText(_translate("MainWindow", "Login"))
         self.add_btn.setText(_translate("MainWindow", "Add"))
+        self.live_btn.setText(_translate("MainWindow", "Live!"))
+        self.image_btn.setText(_translate("MainWindow", "Test By Image"))
 
     def add_clicked(self):
         self.window = QtWidgets.QMainWindow()

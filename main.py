@@ -3,12 +3,21 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from webcam import WebCam
 from face import Face
 import cv2
+from shutil import copyfile
 class Window2(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow2")
         MainWindow.resize(800, 600)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
+        self.nameInput = QtWidgets.QLineEdit(self.centralwidget)
+        self.nameInput.setGeometry(QtCore.QRect(180, 220, 200, 25))
+        self.nameInput.setObjectName("nameInput")
+        self.nameInput.setPlaceholderText("Enter Name!") 
+        self.resultLabel = QtWidgets.QLabel(self.centralwidget)
+        self.resultLabel.setGeometry(QtCore.QRect(430, 220, 241, 17))
+        self.resultLabel.setObjectName("resultLabel")
+        self.resultLabel.setVisible(False)
         self.label2 = QtWidgets.QLabel(self.centralwidget)
         self.label2.setGeometry(QtCore.QRect(180, 40, 451, 81))
         font = QtGui.QFont()
@@ -60,48 +69,73 @@ class Window2(object):
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
         MainWindow.setWindowTitle(_translate("MainWindow2", "MainWindow2"))
-        self.label2.setText(_translate("MainWindow", "Face Detection and Recognition"))
+        self.label2.setText(_translate("MainWindow2", "Face Detection and Recognition"))
+        self.resultLabel.setText(_translate("MainWindow2", "Result"))
 
-        # self.comboBox.setItemText(0, _translate("MainWindow2", "-----------------------"))
-        # self.comboBox.setItemText(1, _translate("MainWindow2", "Internal WebCam"))
-        # self.comboBox.setItemText(2, _translate("MainWindow2", "External WebCam"))
-        # self.comboBox.setItemText(3, _translate("MainWindow2", "Select Image"))
+        
         self.label.setText(_translate("MainWindow2", "Select Input Source"))
-        # self.browse_btn.setText(_translate("MainWindow2", "Browse Image"))
-        # self.fileName_label.setText(_translate("MainWindow2", "file name"))
+       
         self.start_btn.setText(_translate("MainWindow2", "Start"))
     def comboChanged(self):
         text = str(self.comboBox.currentText())
         print("changed",text)
+        self.browse_btn.setVisible(False)
         if text =="Select Image":
             print("true")
             #TODO
             self.fileName_label.setText("file name")
+
+
+
+
             self.browse_btn.setVisible(True)
 
             self.fileName_label.setVisible(True)
         else:
-            self.browse_btn.setVisible(False)
+            
+            self.resultLabel.setVisible(False)
 
             self.fileName_label.setVisible(False)            
             
     def start_clicked(self):
         text = str(self.comboBox.currentText())
-        if text =="-----------------------":
-            self.fileName_label.setText("Please Select Input Source^")
-            
-            self.fileName_label.setVisible(True)
-
-
+        name=self.nameInput.text()
+        print(name)
+        if name =="":
+            print("no")
+            QtWidgets.QMessageBox.critical(self.centralwidget, "Error",'Please Enter Name')
         else:
-            inputScr=0
-            if text =="External WebCam":
-                inputScr = 2
-            
-            webcam=WebCam(inputScr)
-            img = cv2.imread("./data/me.jpg")
-            face = Face(img,1)
-            print(face.hasFace())
+            if text =="-----------------------":
+                # self.resultLabel.setText("Please Select Input Source^")
+                
+                # self.resultLabel.setVisible(True)
+                QtWidgets.QMessageBox.critical(self.centralwidget, "Error",'Please Select Input Source')
+
+
+            else:
+                inputScr=0
+                if text =="External WebCam":
+                    inputScr = 2
+                
+                webcam=WebCam(inputScr)
+                img = cv2.imread("./output/out.jpg")
+                face = Face(img,1)
+                if face.hasFace():
+
+
+                    print("image has face")
+                    src="./output/out.jpg"
+                    dst="./data/"+name+".jpg"
+                    copyfile(src, dst)
+                    QtWidgets.QMessageBox.information(self.centralwidget, "Success",'Face successfully added')
+
+                else:
+                    QtWidgets.QMessageBox.critical(self.centralwidget, "Error",'Image has no face')
+
+
+    def selectFile(self):
+        pass
+        
 
 
 

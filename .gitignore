@@ -3,4 +3,5 @@
 /gui
 /yolo-coco
 /output
+/testData
 /__pycache__

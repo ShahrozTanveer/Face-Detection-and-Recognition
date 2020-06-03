@@ -1,6 +1,6 @@
-import face_recognition
-# import cv2
-# import numpy as np
+import face_recognition as fr
+import cv2
+import numpy as np
 import os
 
 
@@ -21,20 +21,53 @@ class Recognition:
         for file in os.listdir('./data/'):
             self.faceNames.append(os.path.splitext(file)[0])
             print("./data/"+file)
-            image=face_recognition.load_image_file("./data/"+file)
-            faceEncoding = face_recognition.face_encodings(image)[0]
+            image=fr.load_image_file("./data/"+file)
+            faceEncoding = fr.face_encodings(image)[0]
             self.knownFaces.append(faceEncoding)
+
+        print("")
         print(self.faceNames)
+
+    def recognizeImage(self,img_path):
+        img=cv2.imread(img_path)
+        frame = cv2.resize(img, (0, 0), fx=0.25, fy=0.25)
+        rgb_frame = frame[:, :, ::-1]#BRG to RGB
+        facesInFrame = fr.face_locations(rgb_frame)
+        faceEnc = fr.face_encodings(rgb_frame, facesInFrame)
+        face_names = []
+        for face_encoding in faceEnc:
+            matches = fr.compare_faces(self.knownFaces, face_encoding)
+            face_distances = fr.face_distance(self.knownFaces, face_encoding)
+            best_match_index = np.argmin(face_distances)
+
+            if matches[best_match_index]:
+                name = self.faceNames[best_match_index]
+            else:
+                return "-1"
+            face_names.append(name)
+  
+        retname=""
+        for (top, right, bottom, left), name in zip(facesInFrame, face_names):
+            top = top * 4
+            right = right * 4
+            bottom =  bottom *4
+            left = left * 4
+
+            cv2.rectangle(img, (left, top), (right, bottom), (0, 0, 255), 2)
+
+            cv2.rectangle(img, (left, bottom - 35), (right, bottom), (0, 0, 255), cv2.FILLED)
+            font = cv2.FONT_HERSHEY_DUPLEX
+            cv2.putText(img, name, (left + 6, bottom - 6), font, 0.5, (255, 255, 255), 1)
+            retname = name
+
+        cv2.imshow('img', img)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
+
+        return retname
 
 
 
 rec= Recognition()
-
-# biden_image = face_recognition.load_image_file("./data/me.jpg")
-# biden_face_encoding = face_recognition.face_encodings(biden_image)[0]
-# known_face_encodings = [
-#     biden_face_encoding,
-# ]
-# known_face_names = [
-#     "Sharoz",
-# ]
+# print(rec.recognizeImage("./testData/charles.jpg"))
+print(rec.recognizeImage("./testData/tstMAx.jpg"))

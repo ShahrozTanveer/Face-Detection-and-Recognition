@@ -155,9 +155,6 @@ class Window2(object):
                     QtWidgets.QMessageBox.critical(self.centralwidget, "Error",'Image has no face')
 
 
-    def selectFile(self):
-        pass
-        
 
 
 
@@ -166,6 +163,7 @@ class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
         MainWindow.resize(800, 600)
+        self.filePath=""
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.label = QtWidgets.QLabel(self.centralwidget)
@@ -180,6 +178,7 @@ class Ui_MainWindow(object):
         self.login_btn = QtWidgets.QPushButton(self.centralwidget)
         self.login_btn.setGeometry(QtCore.QRect(260, 260, 121, 61))
         self.login_btn.setObjectName("login_btn")
+        self.login_btn.clicked.connect(self.login_clicked)
         self.add_btn = QtWidgets.QPushButton(self.centralwidget)
         self.add_btn.setGeometry(QtCore.QRect(420, 260, 121, 61))
         self.add_btn.setObjectName("add_btn")
@@ -193,7 +192,7 @@ class Ui_MainWindow(object):
         self.image_btn= QtWidgets.QPushButton(self.centralwidget)
         self.image_btn.setGeometry(QtCore.QRect(420, 350, 121, 61))
         self.image_btn.setObjectName("image_btn")
-
+        self.image_btn.clicked.connect(self.testImage)
 
 
         MainWindow.setCentralWidget(self.centralwidget)
@@ -233,6 +232,53 @@ class Ui_MainWindow(object):
             rec = Recognition()
             rec.recognizeLive(0)
         # pass
+    def getFile(self):
+        fileName = QtWidgets.QFileDialog.getOpenFileName(self.centralwidget,'Select image','.','Image Files (*.jpg *.jpeg)')
+        # print(fileName[0])
+        if len(fileName) >0:
+            print(fileName[0])
+            self.filePath=fileName[0]
+    def testImage(self):
+        self.getFile()
+        if self.filePath == "":
+                    QtWidgets.QMessageBox.critical(self.centralwidget, "Error",'Please Select Image')
+        else:
+            img = cv2.imread(self.filePath)
+            face = Face(img,1)
+            if face.hasFace():
+                if face.numberOfFace()  == 1:
+                    src=self.filePath
+                    print("ok")
+                    rec= Recognition()
+                    if rec.recognizeImage(self.filePath) == "-1":
+                        QtWidgets.QMessageBox.information(self.centralwidget, "Not Found",'Unknown Face!')
+
+
+                else:
+                    QtWidgets.QMessageBox.critical(self.centralwidget, "Error",'Image contains '+str(face.numberOfFace())+" faces. It sholud only have one face" )
+
+            else:
+                QtWidgets.QMessageBox.critical(self.centralwidget, "Error","Image has no face" )
+
+
+    def login_clicked(self):
+        buttonReply = QtWidgets.QMessageBox.question(self.centralwidget, 'Live Feed!', "Do you like use external web cam?", QtWidgets.QMessageBox.Yes , QtWidgets.QMessageBox.No)
+        rec = Recognition()
+        name=""
+        if buttonReply == QtWidgets.QMessageBox.Yes:
+            name = rec.recognizeLogin(2)
+        else:
+            name = rec.recognizeLogin(0)
+        if name == "-1":
+            QtWidgets.QMessageBox.critical(self.centralwidget, "Error",'Login Failed')
+        else:
+            QtWidgets.QMessageBox.information(self.centralwidget, "Success",'Login successfully!\n Welcome '+str(name))
+
+
+        
+
+
+    
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)

@@ -111,7 +111,61 @@ class Recognition:
         cap.release()
         cv2.destroyAllWindows()
 
+    def recognizeLogin(self,opt):
+        counter = 0
+        found=0
+        retname="-1"
+        cap = cv2.VideoCapture(opt)
+        process_this_frame=True
+        while True:
+            counter +=1
+            ret, img = cap.read()
+            frame = cv2.resize(img, (0, 0), fx=0.25, fy=0.25)
+            rgb_frame = frame[:, :, ::-1]#BRG to RGB
+            facesInFrame = fr.face_locations(rgb_frame)
+            if process_this_frame:
+                faceEnc = fr.face_encodings(rgb_frame, facesInFrame)
+                face_names = []
+                for face_encoding in faceEnc:
+                    matches = fr.compare_faces(self.knownFaces, face_encoding)
+                    face_distances = fr.face_distance(self.knownFaces, face_encoding)
+                    best_match_index = np.argmin(face_distances)
 
+                    if matches[best_match_index]:
+                        name = self.faceNames[best_match_index]
+                        found +=1
+                    
+                    else:
+                        # print("unknown face")
+                        name="unknown"
+                    face_names.append(name)
+            process_this_frame = not process_this_frame
+            if found >5:
+                retname=name
+                break
+            
+            for (top, right, bottom, left), name in zip(facesInFrame, face_names):
+                top = top * 4
+                right = right * 4
+                bottom =  bottom *4
+                left = left * 4
+
+                cv2.rectangle(img, (left, top), (right, bottom), (0, 0, 255), 2)
+
+                cv2.rectangle(img, (left, bottom - 35), (right, bottom), (0, 0, 255), cv2.FILLED)
+                font = cv2.FONT_HERSHEY_DUPLEX
+                cv2.putText(img, name, (left + 6, bottom - 6), font, 0.5, (255, 255, 255), 1)
+                
+
+            cv2.imshow('img', img)
+            if cv2.waitKey(1) & 0xFF == ord('q'):
+                break
+            if counter>100:
+
+                break
+        cap.release()
+        cv2.destroyAllWindows()
+        return retname
 
 
 

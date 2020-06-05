@@ -39,15 +39,19 @@ class Recognition:
         frame = cv2.resize(img, (0, 0), fx=0.25, fy=0.25)
         rgb_frame = frame[:, :, ::-1]#BRG to RGB
         facesInFrame = fr.face_locations(rgb_frame)
-        # print(facesInFrame)
         faceEnc = fr.face_encodings(rgb_frame, facesInFrame)
         face_names = []
         for face_encoding in faceEnc:
+            print(face_encoding)
+            
+
             matches = fr.compare_faces(self.knownFaces, face_encoding)
+            # print(matches)
             face_distances = fr.face_distance(self.knownFaces, face_encoding)
             best_match_index = np.argmin(face_distances)
 
             if matches[best_match_index]:
+                # print(matches)
                 name = self.faceNames[best_match_index]
             else:
                 # return "-1"
@@ -55,18 +59,18 @@ class Recognition:
             face_names.append(name)
   
         retname=""
-        img = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
 
         for (top, right, bottom, left), name in zip(facesInFrame, face_names):
             top = top * 4
             right = right * 4
             bottom =  bottom *4
             left = left * 4
-            cv2.rectangle(img, (left, top), (right, bottom), (0, 0, 0), 2)
+            cv2.rectangle(img, (left, top), (right, bottom), (255, 0, 0), 2)
 
-            cv2.rectangle(img, (left, bottom - 35), (right, bottom), (0, 0, 0), cv2.FILLED)
-            font = cv2.FONT_HERSHEY_DUPLEX
-            cv2.putText(img, name, (left + 6, bottom - 6), font, 0.5, (255,255, 255), 1)
+            cv2.rectangle(img, (left, bottom - 35), (right, bottom), (255, 0, 0), cv2.FILLED)
+
+            cv2.putText(img, name, (left + 6, bottom - 6), cv2.FONT_HERSHEY_DUPLEX, 0.7, (0,0, 0), 1)
             retname = name
 
         cv2.imshow('img', img)
@@ -83,6 +87,7 @@ class Recognition:
             frame = cv2.resize(img, (0, 0), fx=0.25, fy=0.25)
             rgb_frame = frame[:, :, ::-1]#BRG to RGB
             facesInFrame = fr.face_locations(rgb_frame)
+
             if process_this_frame:
                 faceEnc = fr.face_encodings(rgb_frame, facesInFrame)
                 face_names = []
@@ -109,8 +114,8 @@ class Recognition:
                 cv2.rectangle(img, (left, top), (right, bottom), (0, 0, 255), 2)
 
                 cv2.rectangle(img, (left, bottom - 35), (right, bottom), (0, 0, 255), cv2.FILLED)
-                font = cv2.FONT_HERSHEY_DUPLEX
-                cv2.putText(img, name, (left + 6, bottom - 6), font, 0.5, (255, 255, 255), 1)
+
+                cv2.putText(img, name, (left + 6, bottom - 6), cv2.FONT_HERSHEY_DUPLEX, 0.5, (255, 255, 255), 1)
                 retname = name
 
             cv2.imshow('img', img)
@@ -162,8 +167,8 @@ class Recognition:
                 cv2.rectangle(img, (left, top), (right, bottom), (0, 0, 255), 2)
 
                 cv2.rectangle(img, (left, bottom - 35), (right, bottom), (0, 0, 255), cv2.FILLED)
-                font = cv2.FONT_HERSHEY_DUPLEX
-                cv2.putText(img, name, (left + 6, bottom - 6), font, 0.5, (255, 255, 255), 1)
+
+                cv2.putText(img, name, (left + 6, bottom - 6), cv2.FONT_HERSHEY_DUPLEX, 0.5, (255, 255, 255), 1)
                 
 
             cv2.imshow('img', img)

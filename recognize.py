@@ -60,7 +60,6 @@ class Recognition:
   
         retname=""
 
-
         for (top, right, bottom, left), name in zip(facesInFrame, face_names):
             top = top * 4
             right = right * 4
@@ -68,9 +67,9 @@ class Recognition:
             left = left * 4
             cv2.rectangle(img, (left, top), (right, bottom), (255, 0, 0), 2)
 
-            cv2.rectangle(img, (left, bottom - 35), (right, bottom), (255, 0, 0), cv2.FILLED)
+            cv2.rectangle(img, (left, bottom), (right, bottom+40), (255, 0, 0), cv2.FILLED)
 
-            cv2.putText(img, name, (left + 6, bottom - 6), cv2.FONT_HERSHEY_DUPLEX, 0.7, (0,0, 0), 1)
+            cv2.putText(img, name, (left + 6, bottom +25), cv2.FONT_HERSHEY_DUPLEX, 0.7, (255,255, 255), 1)
             retname = name
 
         cv2.imshow('img', img)
@@ -111,11 +110,11 @@ class Recognition:
                 bottom =  bottom *4
                 left = left * 4
 
-                cv2.rectangle(img, (left, top), (right, bottom), (0, 0, 255), 2)
+                cv2.rectangle(img, (left, top), (right, bottom), (255, 0, 0), 2)
 
-                cv2.rectangle(img, (left, bottom - 35), (right, bottom), (0, 0, 255), cv2.FILLED)
+                cv2.rectangle(img, (left, bottom), (right, bottom+40), (255, 0, 0), cv2.FILLED)
 
-                cv2.putText(img, name, (left + 6, bottom - 6), cv2.FONT_HERSHEY_DUPLEX, 0.5, (255, 255, 255), 1)
+                cv2.putText(img, name, (left + 6, bottom +25), cv2.FONT_HERSHEY_DUPLEX, 0.7, (255,255, 255), 1)
                 retname = name
 
             cv2.imshow('img', img)
@@ -164,12 +163,11 @@ class Recognition:
                 bottom =  bottom *4
                 left = left * 4
 
-                cv2.rectangle(img, (left, top), (right, bottom), (0, 0, 255), 2)
+                cv2.rectangle(img, (left, top), (right, bottom), (255, 0, 0), 2)
 
-                cv2.rectangle(img, (left, bottom - 35), (right, bottom), (0, 0, 255), cv2.FILLED)
+                cv2.rectangle(img, (left, bottom), (right, bottom+40), (255, 0, 0), cv2.FILLED)
 
-                cv2.putText(img, name, (left + 6, bottom - 6), cv2.FONT_HERSHEY_DUPLEX, 0.5, (255, 255, 255), 1)
-                
+                cv2.putText(img, name, (left + 6, bottom +25), cv2.FONT_HERSHEY_DUPLEX, 0.7, (255,255, 255), 1)
 
             cv2.imshow('img', img)
             if cv2.waitKey(1) & 0xFF == ord('q'):

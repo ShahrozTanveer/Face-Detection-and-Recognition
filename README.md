@@ -46,7 +46,7 @@ $ pip3 install -r requirements.txt
 ```bash
 $ pyhton3 main.py
 ```
-*make sure before running code create folder "yolo" and paste .cfg , .name and .weights files*
+*make sure before running code paste .cfg and .weights files*
 
 
 

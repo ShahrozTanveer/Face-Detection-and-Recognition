@@ -4,9 +4,9 @@ import numpy as np
 
 class Face:
     def __init__(self,img,flag):
-        net = cv2.dnn.readNet("./yolo-coco/face.weights", "./yolo-coco/face.cfg")
+        net = cv2.dnn.readNet("./yolo/face.weights", "./yolo/face.cfg")
         classes = list()
-        f= open("./yolo-coco/face.names", "r")#read .names file
+        f= open("./yolo/face.names", "r")#read .names file
         for line in f.readlines():#loop each line in file
             classes.append(line.strip())
         layer_names = net.getLayerNames()#get layes names

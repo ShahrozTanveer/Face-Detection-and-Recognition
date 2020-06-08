@@ -11,8 +11,8 @@
 
 ## Project Features.
 * Login(video).
-* Live Detection and Recognized(video).
-* Detection & Recognized via Image.
+* Live Detection and Recognition(video).
+* Detection & Recognition via Image.
 * ADD Face to DataSet For Future Recognized (via image or live image Capture via internal or external WebCam.)
 
 ## Prerequisites

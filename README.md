@@ -9,6 +9,8 @@
 [![GitHub followers](https://img.shields.io/github/followers/ShahrozTanveer.svg?style=social&label=Follow)](https://github.com/ShahrozTanveer)
 [![Twitter Follow](https://img.shields.io/twitter/follow/saadtanveer3121.svg?style=social)](https://twitter.com/saadtanveer3121)
 
+Please consider following this project's author, [Sharoz Tanveer](https://github.com/ShahrozTanveer), and consider starring the project to show your :heart: and support.
+
 ## Project Features.
 * Login(video).
 * Live Detection and Recognition(video).
@@ -47,6 +49,20 @@ $ pip3 install -r requirements.txt
 $ pyhton3 main.py
 ```
 *make sure before running code paste .cfg and .weights files*
+
+### Author
+
+**Sharoz Tanveer**
+
+* [LinkedIn Profile](https://www.linkedin.com/in/sharoztanveer/)
+* [GitHub Profile](https://github.com/ShahrozTanveer)
+* [Twitter Profile](https://twitter.com/saadtanveer3121)
+
+### License
+
+Copyright © 2020, [Sharoz Tanveer](https://github.com/ShahrozTanveer).
+Released under the [MIT License](LICENSE).
+
 
 
 

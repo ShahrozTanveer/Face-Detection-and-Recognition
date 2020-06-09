@@ -41,7 +41,7 @@ $ git clone https://github.com/ShahrozTanveer/Face-Detection-and-Recognition.git
 $ pip3 install -r requirements.txt
 ```
 
-#### Email @ saadtanveer3121@gmail.com and i'll send you weights and cfg file for Face detection
+#### Email @ sharoz.py@gmail.com and i'll send you weights and cfg file for Face detection
 * Run
 ```bash
 $ pyhton3 main.py

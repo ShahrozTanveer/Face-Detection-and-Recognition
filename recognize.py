@@ -2,13 +2,6 @@ import face_recognition as fr
 import cv2
 import numpy as np
 import os
-
-
-
-
-# os.path.splitext(
-
-
 class Recognition:
     def __init__(self):
         self.faceNames=list()

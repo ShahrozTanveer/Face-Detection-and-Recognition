@@ -10,4 +10,4 @@ To get ready to work on the codebase, please do the following:
 2. Run `$ pip3 install -r requirements.txt`
 3. Code your heart out!
 4. Push Code.
-4. [Submit a pull request](https://github.com/ShahrozTanveer/Face-Detection-and-Recognition/compare)
+5. [Submit a pull request](https://github.com/ShahrozTanveer/Face-Detection-and-Recognition/compare)

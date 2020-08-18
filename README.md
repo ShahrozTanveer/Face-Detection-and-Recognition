@@ -47,7 +47,7 @@ $ pip3 install -r requirements.txt
 #### Email @ sharoz.py@gmail.com and i'll send you weights and cfg file for Face detection
 * Run
 ```bash
-$ pyhton3 main.py
+$ python3 main.py
 ```
 *make sure before running code paste .cfg and .weights files*
 ## Contributing

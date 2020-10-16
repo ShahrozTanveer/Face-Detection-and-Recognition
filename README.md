@@ -58,6 +58,14 @@ $ python3 main.py
 ## Contributors
 [![](https://sourcerer.io/fame/ShahrozTanveer/ShahrozTanveer/Face-Detection-and-Recognition/images/0)](https://sourcerer.io/fame/ShahrozTanveer/ShahrozTanveer/Face-Detection-and-Recognition/links/0)[![](https://sourcerer.io/fame/ShahrozTanveer/ShahrozTanveer/Face-Detection-and-Recognition/images/1)](https://sourcerer.io/fame/ShahrozTanveer/ShahrozTanveer/Face-Detection-and-Recognition/links/1)[![](https://sourcerer.io/fame/ShahrozTanveer/ShahrozTanveer/Face-Detection-and-Recognition/images/2)](https://sourcerer.io/fame/ShahrozTanveer/ShahrozTanveer/Face-Detection-and-Recognition/links/2)[![](https://sourcerer.io/fame/ShahrozTanveer/ShahrozTanveer/Face-Detection-and-Recognition/images/3)](https://sourcerer.io/fame/ShahrozTanveer/ShahrozTanveer/Face-Detection-and-Recognition/links/3)[![](https://sourcerer.io/fame/ShahrozTanveer/ShahrozTanveer/Face-Detection-and-Recognition/images/4)](https://sourcerer.io/fame/ShahrozTanveer/ShahrozTanveer/Face-Detection-and-Recognition/links/4)[![](https://sourcerer.io/fame/ShahrozTanveer/ShahrozTanveer/Face-Detection-and-Recognition/images/5)](https://sourcerer.io/fame/ShahrozTanveer/ShahrozTanveer/Face-Detection-and-Recognition/links/5)[![](https://sourcerer.io/fame/ShahrozTanveer/ShahrozTanveer/Face-Detection-and-Recognition/images/6)](https://sourcerer.io/fame/ShahrozTanveer/ShahrozTanveer/Face-Detection-and-Recognition/links/6)[![](https://sourcerer.io/fame/ShahrozTanveer/ShahrozTanveer/Face-Detection-and-Recognition/images/7)](https://sourcerer.io/fame/ShahrozTanveer/ShahrozTanveer/Face-Detection-and-Recognition/links/7)
 
+## Check out my other Deep Learning Projects
+* [Hand-Gestures-Recognition (1-5) using Darknet& YOLO](https://github.com/ShahrozTanveer/Hand-Gestures-Recognition)
+* [Hand-Gestures-Recognition-ASL!](https://github.com/ShahrozTanveer/Hand-Gestures-Recognition-ASL)
+
+
+
+
+
 ### Author
 
 **Sharoz Tanveer**

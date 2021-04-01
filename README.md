@@ -8,7 +8,8 @@
 [![Python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://github.com/ShahrozTanveer/Face-Detection-and-Recognition/blob/master/LICENSE)
 [![GitHub followers](https://img.shields.io/github/followers/ShahrozTanveer.svg?style=social&label=Follow&maxAge=2592000)](https://github.com/ShahrozTanveer)
-[![Twitter Follow](https://img.shields.io/twitter/follow/saadtanveer3121.svg?style=social)](https://twitter.com/saadtanveer3121)
+[![Twitter Follow](https://img.shields.io/twitter/follow/sharoz_tanveer.svg?style=social)](https://twitter.com/sharoz_tanveer)
+
 
 Please consider following this project's author, [Sharoz Tanveer](https://github.com/ShahrozTanveer), and consider starring the project to show your :heart: and support.
 
@@ -72,7 +73,7 @@ $ python3 main.py
 
 * [LinkedIn Profile](https://www.linkedin.com/in/sharoztanveer/)
 * [GitHub Profile](https://github.com/ShahrozTanveer)
-* [Twitter Profile](https://twitter.com/saadtanveer3121)
+* [Twitter Profile](https://twitter.com/sharoz_tanveer)
 
 ### License
 

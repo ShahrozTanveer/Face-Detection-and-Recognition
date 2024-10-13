@@ -1,4 +1,4 @@
 numpy==1.22.0
-opencv-python==4.2.0.34
+opencv-python==4.8.1.78
 PyQt5==5.15.0
 face-recognition==1.3.0
